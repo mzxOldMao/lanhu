@@ -2,11 +2,9 @@ package cn.suancloud.lisheng.api.model.copy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -15,8 +13,8 @@ public class EquipCopy implements Serializable {
     @Id
     /*@GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name="system-uuid",strategy="uuid")*/
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String name;
     @Column
@@ -38,5 +36,5 @@ public class EquipCopy implements Serializable {
     private Long addTime;
     @Column(name = "equip_type_id")
     @JsonIgnore
-    private UUID typeID;
+    private Long typeID;
 }

@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class TypeDetailServiceImpl implements TypeDetailService {
@@ -20,17 +19,24 @@ public class TypeDetailServiceImpl implements TypeDetailService {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<TypeDetail> findAllByTypeId(UUID typeId) {
-        String sql = "select id,address,data_type,parse_type,multi,show_id,remark,type_id from equip_type_detail where type_id = '"+typeId+"';";
+    public List<TypeDetail> findAllByTypeId(Long typeId) {
+        String sql = "select etd.id,etd.name,address,data_type,parse_type,multi,show_id,remark,equip_type_id as typeId from equip_type_detail etd where equip_type_id = '"+typeId+"';";
         List<TypeDetail> typeDetailList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<TypeDetail>(TypeDetail.class));
         return typeDetailList;
     }
+   /*@Override
+   public List<TypeDetail> findAllByTypeId(UUID typeId) {
+       return typeDetailDao.findTypeDetailById(typeId);
+   }*/
 
     @Override
     public void save(TypeDetailForm typeDetailForm) {
         TypeDetail typeDetail = new TypeDetail();
         if (typeDetailForm.getAddress()!=null){
             typeDetail.setAddress(typeDetailForm.getAddress());
+        }
+        if (typeDetailForm.getName()!=null){
+            typeDetail.setName(typeDetailForm.getName());
         }
         if (typeDetailForm.getDataType()!=null){
             typeDetail.setDataType(typeDetailForm.getDataType());
@@ -54,10 +60,13 @@ public class TypeDetailServiceImpl implements TypeDetailService {
     }
 
     @Override
-    public void update(TypeDetailForm typeDetailForm,UUID uuid) {
+    public void update(TypeDetailForm typeDetailForm,Long uuid) {
         TypeDetail typeDetail = new TypeDetail();
         if (typeDetailForm.getAddress()!=null){
             typeDetail.setAddress(typeDetailForm.getAddress());
+        }
+        if (typeDetailForm.getName()!=null){
+            typeDetail.setName(typeDetailForm.getName());
         }
         if (typeDetailForm.getDataType()!=null){
             typeDetail.setDataType(typeDetailForm.getDataType());
@@ -82,7 +91,7 @@ public class TypeDetailServiceImpl implements TypeDetailService {
     }
 
     @Override
-    public void deleteById(UUID uuid) {
+    public void deleteById(Long uuid) {
         typeDetailDao.deleteById(uuid);
     }
 

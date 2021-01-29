@@ -125,7 +125,14 @@ public class TimeStampUtils {
         return data.getTime();
     }
 
-    public static void main(String[] args) {
-        System.out.println(longForString(1611132824621L));
+    public static void main(String[] args) {/*
+        System.out.println(stringForlong("1970-01-01 08:00:00"));
+        System.out.println(stringForlong("1970-01-02 08:00:00")); //一天的时间戳     86400000
+        System.out.println(stringForlong("1970-02-01 08:00:00")); //一个月的时间戳为 2678400000
+        System.out.println(stringForlong("1971-01-01 08:00:00")); //一年的时间戳为   31536000000
+        System.out.println(longForString(1630000000000l));
+        System.out.println(longForString(1630000000000l+86400000l));
+        System.out.println(longForString(1630000000000l+2678400000l));
+        System.out.println(longForString(1630000000000l+31536000000l));*/
     }
 }

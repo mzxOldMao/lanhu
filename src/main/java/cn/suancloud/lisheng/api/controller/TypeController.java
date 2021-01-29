@@ -78,7 +78,7 @@ public class TypeController extends BaseController{
      * @return
      */
     @DeleteMapping(value = "/deleteType/{type_id}",produces = "application/json;charset=UTF-8")
-    public ResponseEntity deleteType(@PathVariable UUID type_id){
+    public ResponseEntity deleteType(@PathVariable Long type_id){
         typeService.deleteById(type_id);
         Map<String,Object> map = new HashMap<>();
         map.put("code",200);
@@ -104,7 +104,7 @@ public class TypeController extends BaseController{
      * @return
      */
     @PutMapping(value = "/updateType/{type_id}",produces = "application/json;charset=UTF-8")
-    public ResponseEntity update1(@PathVariable UUID type_id,@RequestParam(value = "name")String name,
+    public ResponseEntity update1(@PathVariable Long type_id,@RequestParam(value = "name")String name,
                                  @RequestParam(value = "descr")String descr){
         if (name == null && name == "") {
             throw new IllegalCallException("类型名称不能为空");

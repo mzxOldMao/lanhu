@@ -15,12 +15,12 @@ public interface TypeService {
 /*    //修改类型
     void update(TypeForm typeForm);*/
     //根据type_id查询type
-    Type findById(UUID uuid);
+    Type findById(Long id);
 
     //删除
     void deleteByList(String[] uuids);
-    void deleteById(UUID uuid);
+    void deleteById(Long id);
     //修改
-    void updateType(TypeForm typeForm,UUID uuid);
-    void updateType1(String name,String descr,UUID uuid);
+    void updateType(TypeForm typeForm,Long id);
+    void updateType1(String name,String descr,Long id);
 }

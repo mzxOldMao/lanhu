@@ -7,7 +7,6 @@ import cn.suancloud.lisheng.api.model.form.EquipUpdateForm;
 import cn.suancloud.lisheng.api.utils.PageListGer;
 import org.springframework.data.domain.Page;
 
-import java.util.UUID;
 
 
 public interface EquipService {
@@ -18,7 +17,7 @@ public interface EquipService {
     //新增设备
     void save(EquipAddForm equipAddForm,boolean flag);
     //删除一个设备
-    void deleteEquip(UUID uuid);
+    void deleteEquip(Long uuid);
     //批量删除设备
     void deleteByList(String[] uuids);
     //修改设备信息

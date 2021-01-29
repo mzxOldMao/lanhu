@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5431/directory
-    username: postgres
-    password: postgresql
+    url: jdbc:postgresql://127.0.0.1:5432/thingsboard
+    username: thingsboard
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true

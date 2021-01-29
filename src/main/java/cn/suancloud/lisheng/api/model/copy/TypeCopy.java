@@ -1,21 +1,20 @@
 package cn.suancloud.lisheng.api.model.copy;
 
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "equip_type")
 public class TypeCopy implements Serializable {
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name="system-uuid",strategy="uuid")
-    private UUID id;
+    /*@GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name="system-uuid",strategy="uuid")*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String name;
     @Column

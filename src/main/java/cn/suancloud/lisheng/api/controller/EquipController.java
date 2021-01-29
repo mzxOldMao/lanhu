@@ -1,5 +1,6 @@
 package cn.suancloud.lisheng.api.controller;
 
+import cn.suancloud.lisheng.api.exception.FormException;
 import cn.suancloud.lisheng.api.model.Equip;
 import cn.suancloud.lisheng.api.model.Type;
 import cn.suancloud.lisheng.api.model.copy.EquipCopy;
@@ -115,7 +116,7 @@ public class EquipController extends BaseController{
      * @return
      */
     @DeleteMapping(value = "/deleteEquip/{equip_id}",produces = "application/json;charset=UTF-8")
-    public ResponseEntity deleteEquip(@PathVariable UUID equip_id){
+    public ResponseEntity deleteEquip(@PathVariable Long equip_id){
         equipService.deleteEquip(equip_id);
         Map<String,Object> map = new HashMap<>();
         map.put("code",200);
@@ -140,6 +141,7 @@ public class EquipController extends BaseController{
     @PutMapping(value = "/updateEquip",produces = "application/json;charset=UTF-8")
     public ResponseEntity updateEquip(@RequestBody @Valid EquipUpdateForm equipUpdateForm, BindingResult result){
         hasErrors(result);
+        //Type type = typeService.findById(equipAddForm.getTypeId());
         equipService.updateEquip(equipUpdateForm);
         Map<String,Object> map = new HashMap<>();
         map.put("code",200);

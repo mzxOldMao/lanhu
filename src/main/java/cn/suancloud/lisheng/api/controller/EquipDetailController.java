@@ -22,7 +22,7 @@ public class EquipDetailController {
      * 设备详情（历史数据）
      */
     @GetMapping(value = "/getEquip/{equip_id}",produces = "application/json;charset=UTF-8")
-    public ResponseEntity getequip(@PathVariable("equip_id") UUID uuid,
+    public ResponseEntity getequip(@PathVariable("equip_id") Long uuid,
                                    @RequestParam(value = "pageNum",required = false,defaultValue = "0")String pageNum,
                                    @RequestParam(value = "pageSize",required = false,defaultValue = "10")String pageSize){
         int num = Integer.parseInt(pageNum);
@@ -44,8 +44,8 @@ public class EquipDetailController {
      */
     @GetMapping(value = "/getEquipBytimes/{equip_id}",produces = "application/json;charset=UTF-8")
     public ResponseEntity findByTime(DateForm dateForm,
-                                     @PathVariable("equip_id") UUID uuid){
-        Page<EquipDetail> page = equipDetailService.findAllByTimes(dateForm,uuid);
+                                     @PathVariable("equip_id") Long id){
+        Page<EquipDetail> page = equipDetailService.findAllByTimes(dateForm,id);
         for (EquipDetail equipDetail:page){
             equipDetail.setUpload_date(TimeStampUtils.longForString(equipDetail.getUploadTime()));
             equipDetail.setRecord_date(TimeStampUtils.longForString(equipDetail.getRecordTime()));

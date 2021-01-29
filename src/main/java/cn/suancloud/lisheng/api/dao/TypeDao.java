@@ -7,10 +7,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
 
 @Repository
-public interface TypeDao extends JpaRepository<Type, UUID> {
+public interface TypeDao extends JpaRepository<Type, Long> {
     Page<Type> findAll(Specification specification, Pageable pageable);
-    Type findTypeById(UUID uuid);
+    Type findTypeById(Long id);
 }

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.criteria.*;
-import java.util.UUID;
 
 @Service
 public class EquipDetailServiceImpl implements EquipDetailService {
@@ -22,14 +21,14 @@ public class EquipDetailServiceImpl implements EquipDetailService {
     private EquipDetailDao equipDetailDao;
 
     @Override
-    public Page<EquipDetail> findAll(UUID uuid,int num,int size) {
+    public Page<EquipDetail> findAll(Long id,int num,int size) {
         Specification<EquipDetail> specification = new Specification<EquipDetail>(){
             @Override
             public Predicate toPredicate(Root<EquipDetail> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                Path<UUID> uuidPath = root.get("equipId");
+                Path<Long> uuidPath = root.get("equipId");
                 Predicate predicate = null;
                 if (!ObjectUtils.isEmpty(uuidPath)){
-                    predicate = criteriaBuilder.equal(uuidPath.as(UUID.class),uuid);
+                    predicate = criteriaBuilder.equal(uuidPath.as(Long.class),id);
                 }
                 return predicate;
             }
@@ -39,7 +38,7 @@ public class EquipDetailServiceImpl implements EquipDetailService {
     }
 
     @Override
-    public Page<EquipDetail> findAllByTimes(DateForm dateForm,UUID uuid) {
+    public Page<EquipDetail> findAllByTimes(DateForm dateForm,Long id) {
         //转换成时间戳
         Long start = 0L; //不输入时间段默认从1970年算起
         Long end = System.currentTimeMillis();
@@ -53,12 +52,12 @@ public class EquipDetailServiceImpl implements EquipDetailService {
         Specification<EquipDetail> specification = new Specification<EquipDetail>() {
             @Override
             public Predicate toPredicate(Root<EquipDetail> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                Path<UUID> uuidPath = root.get("equipId");
+                Path<Long> uuidPath = root.get("equipId");
                 Path<Long> time = root.get("uploadTime");
                 Predicate predicate3 = null;
                 Predicate predicate1 = null;
                 Predicate predicate2 = null;
-                predicate3 = criteriaBuilder.equal(uuidPath.as(UUID.class),uuid);
+                predicate3 = criteriaBuilder.equal(uuidPath.as(Long.class),id);
                 if (!ObjectUtils.isEmpty(time)){
                     predicate1 = criteriaBuilder.gt(time.as(Long.class), finalStart);
                     predicate2 = criteriaBuilder.le(time.as(Long.class), finalEnd);

@@ -1,13 +1,10 @@
 package cn.suancloud.lisheng.api.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -15,9 +12,10 @@ import java.util.UUID;
 public class Equip implements Serializable {
     @Id
     /*@GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name="system-uuid",strategy="uuid")*/
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GenericGenerator(name="system-uuid",strategy="uuid")
+    @GeneratedValue(strategy = GenerationType.AUTO)*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String name;
     @Column

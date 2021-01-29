@@ -4,12 +4,11 @@ import cn.suancloud.lisheng.api.model.TypeDetail;
 import cn.suancloud.lisheng.api.model.form.TypeDetailForm;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface TypeDetailService {
-    List<TypeDetail> findAllByTypeId(UUID typeId);
+    List<TypeDetail> findAllByTypeId(Long typeId);
     void save(TypeDetailForm typeDetailForm);
-    void update(TypeDetailForm typeDetailForm,UUID uuid);
-    void deleteById(UUID uuid);
+    void update(TypeDetailForm typeDetailForm,Long uuid);
+    void deleteById(Long uuid);
     void deleteByList(String[] uuids);
 }

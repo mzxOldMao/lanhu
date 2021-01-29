@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
-public interface TypeDetailDao extends JpaRepository<TypeDetail, UUID> {
+public interface TypeDetailDao extends JpaRepository<TypeDetail, Long> {
+    List<TypeDetail> findTypeDetailById(Long type_id);
 }

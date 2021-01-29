@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.criteria.*;
-import java.util.HashMap;
-import java.util.UUID;
 
 @Service
 public class TypeServiceImpl implements TypeService {
@@ -67,8 +65,8 @@ public class TypeServiceImpl implements TypeService {
     }*/
 
     @Override
-    public Type findById(UUID uuid) {
-        return typeDao.findTypeById(uuid);
+    public Type findById(Long id) {
+        return typeDao.findTypeById(id);
     }
 
     @Override
@@ -86,14 +84,14 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public void deleteById(UUID uuid) {
-        typeDao.deleteById(uuid);
+    public void deleteById(Long id) {
+        typeDao.deleteById(id);
     }
 
     @Override
-    public void updateType(TypeForm typeForm,UUID uuid) {
+    public void updateType(TypeForm typeForm,Long id) {
         Type type = new Type();
-        type.setId(uuid);
+        type.setId(id);
         if (!ObjectUtils.isEmpty(typeForm.getName())){
             type.setName(typeForm.getName());
         }
@@ -105,8 +103,8 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public void updateType1(String name, String descr, UUID uuid) {
-        String sql = "update equip_type set name = '"+name+"',descr = '"+descr+"' where id = '"+uuid+"';";
+    public void updateType1(String name, String descr, Long id) {
+        String sql = "update equip_type set name = '"+name+"',descr = '"+descr+"' where id = '"+id+"';";
         //System.out.println(sql);
         jdbcTemplate.update(sql);
     }

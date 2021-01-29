@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Data
 public class TypeDetailForm implements Serializable {
@@ -19,7 +18,10 @@ public class TypeDetailForm implements Serializable {
     private Integer multi;
     @NotBlank(message = "请填写展示ID")
     private String showId;
+    @NotBlank(message = "字段名称不能为空")
+    private String name;
+
     private String remark;
     @NotNull(message = "请填写类型ID")
-    private UUID typeId;
+    private Long typeId;
 }

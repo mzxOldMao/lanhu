@@ -30,7 +30,7 @@ public class TypeDetailController extends BaseController{
      * @return
      */
     @GetMapping(value = "/getType/{type_id}",produces = "application/json;charset=UTF-8")
-    public ResponseEntity getType(@PathVariable("type_id")UUID typeId){
+    public ResponseEntity getType(@PathVariable("type_id")Long typeId){
         Type type = typeService.findById(typeId);
         List<TypeDetail> typeDetailList = typeDetailService.findAllByTypeId(typeId);
         Map<String,Object> map = new HashMap<>();
@@ -65,7 +65,7 @@ public class TypeDetailController extends BaseController{
      * @return
      */
     @PutMapping(value = "/update/{type_detail_id}",produces = "application/json;charset=UTF-8")
-    public ResponseEntity updateTypeDetail(@RequestBody @Valid TypeDetailForm typeDetailForm,@PathVariable UUID type_detail_id,BindingResult result){
+    public ResponseEntity updateTypeDetail(@RequestBody @Valid TypeDetailForm typeDetailForm,@PathVariable Long type_detail_id,BindingResult result){
         hasErrors(result);
         typeDetailService.update(typeDetailForm,type_detail_id);
         Map<String,Object> map = new HashMap<>();
@@ -80,7 +80,7 @@ public class TypeDetailController extends BaseController{
      * @return
      */
     @DeleteMapping(value = "/deleteTypeDetail/{type_detail_id}",produces = "application/json;charset=UTF-8")
-    public ResponseEntity deleteTypeDetail(@PathVariable UUID type_detail_id){
+    public ResponseEntity deleteTypeDetail(@PathVariable Long type_detail_id){
         typeDetailService.deleteById(type_detail_id);
         Map<String,Object> map = new HashMap<>();
         map.put("code",200);

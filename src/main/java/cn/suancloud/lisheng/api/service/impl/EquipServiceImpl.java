@@ -25,7 +25,6 @@ import org.springframework.util.ObjectUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class EquipServiceImpl implements EquipService {
@@ -120,7 +119,7 @@ public class EquipServiceImpl implements EquipService {
     }
 
     @Override
-    public void deleteEquip(UUID uuid) {
+    public void deleteEquip(Long uuid) {
         equipCopyDao.deleteById(uuid);
     }
 

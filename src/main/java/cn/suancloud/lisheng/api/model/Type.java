@@ -1,13 +1,9 @@
 package cn.suancloud.lisheng.api.model;
 
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -15,9 +11,10 @@ import java.util.UUID;
 public class Type implements Serializable {
     @Id
     /*@GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name="system-uuid",strategy="uuid")*/
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GenericGenerator(name="system-uuid",strategy="uuid")
+    @GeneratedValue(strategy = GenerationType.AUTO)*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column
     private String name;
     @Column
