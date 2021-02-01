@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5431/directory
+    username: postgres
+    password: postgresql
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+      temp:
+        use_jdbc_metadata_defaults: false
+    #database: postgresql
+server:
+  port: 8084

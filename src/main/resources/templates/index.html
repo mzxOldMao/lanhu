@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="app1"></div>
+<div id="app2"></div>
+<input type="button" onclick="btnClick()" value="get按钮">
+<input type="button" onclick="btnClick2()" value="post">
+<input type="button" onclick="btnClick1()" value="post按钮">
+<input type="button" onclick="btnClick3()" value="put按钮">
+
+<script>
+    function btnClick() {
+        $.get('http://localhost:8082/equip/paging?pageNum=0&pageSize=10', function (msg) {
+            $("#app1").html(msg);
+        });
+    }
+
+    function btnClick2() {
+        $.ajax({
+            type:"post",
+            url: "http://localhost:8082/equip/saveEquip",
+            contentType: "application/json;charset=utf-8",
+            //context: document.body,
+            data: {
+                "equipName":"测试设备",
+                "typeId":"94a4ed0d-e7dd-4fab-909a-4a04e99f3b53"
+            }
+        });
+    }
+</script>
+</body>
+</html>
