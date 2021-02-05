@@ -9,6 +9,8 @@ import com.alibaba.fastjson.parser.Feature;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 时间戳工具类
@@ -141,16 +143,20 @@ public class TimeStampUtils {
 
         System.out.println(stringForDate1("2021-01-20"));
         System.out.println(stringForDate1("2021-01-21"));
-        System.out.println(stringForlong1("2021-01-20"));//1611072000000
+        System.out.println(stringForlong1("2021-01-20"));//1611072000000  //七天的时间戳  604,800,000
         System.out.println(stringForlong1("2021-01-21"));//1611158400000
-        System.out.println(stringForlong("2021-01-21 23:59:59"));//1611244799000
-        System.out.println(stringForlong("2021-01-21 09:30:30"));//1611192630000
-        System.out.println(stringForlong("2021-01-20 09:30:30"));//1611106230000*/
+        System.out.println(stringForlong("2021-01-21 23:59:59"));//1611244799000*/
+        /*String startTs = String.valueOf(System.currentTimeMillis());
+        String endTs = String.valueOf(System.currentTimeMillis()-604800000);
+        System.out.println(startTs+startTs.getClass());
+        System.out.println(endTs+endTs.getClass());
+        System.out.println(stringForlong("2021-01-27 09:30:30"));//1611192630000
+        System.out.println(stringForlong("2021-01-20 09:30:30"));//1611106230000
         Book book = new Book();
         book.setId(1L);
         book.setName("肖申克的救赎");
         book.setDesc("udgf粤语");
-        book.setAuthor("fhdi");
+        book.setAuthor((3%2==0?"小明":"小红"));
         System.out.println("book:::::"+book+"类型："+book.getClass());
         //实体类转换成json字符串格式
         String jsonBook = JSON.toJSONString(book);
@@ -158,7 +164,7 @@ public class TimeStampUtils {
 
         //字符串转换成json格式
         JSONObject object = JSONObject.parseObject(jsonBook);
-        System.out.println("object:::::"+object+"类型："+object.getClass());
+        System.out.println("object:::::"+object+"类型："+object.getClass());*/
         /*String author = object.getString("author");
         String name = object.getString("name");
         String desc = object.getString("desc");
@@ -166,32 +172,50 @@ public class TimeStampUtils {
         /*
         //转换成javabean
         Book book2 = JSON.toJavaObject(object,Book.class);
-        System.out.println("book2::::::::"+book2);
-        String jsonV = "[{\"tp\":1611553816540,\"DeviceID\":\"12012141540002\",\"Deviccetype\":\"PMCMeter\"," +
+        System.out.println("book2::::::::"+book2);*/
+        String jsonV1 = "[{\"tp\":1611553816540,\"DeviceID\":\"12012141540002\",\"Deviccetype\":\"PMCMeter\"," +
                 "\"point1\":[{\"id\":36,\"val\":9950},{\"id\":37,\"val\":0},{\"id\":38,\"val\":0},{\"id\":39,\"val\":0},{\"id\":40,\"val\":0},{\"id\":41,\"val\":0},{\"id\":42,\"val\":4746},{\"id\":43,\"val\":0},{\"id\":44,\"val\":816},{\"id\":45,\"val\":24},{\"id\":46,\"val\":4362},{\"id\":47,\"val\":0},{\"id\":48,\"val\":1092},{\"id\":49,\"val\":60},{\"id\":50,\"val\":4956},{\"id\":51,\"val\":0},{\"id\":52,\"val\":1014},{\"id\":53,\"val\":108},{\"id\":54,\"val\":0},{\"id\":55,\"val\":0},{\"id\":56,\"val\":0},{\"id\":57,\"val\":18.75},{\"id\":58,\"val\":21.42},{\"id\":59,\"val\":25},{\"id\":60,\"val\":0},{\"id\":61,\"val\":707788.8},{\"id\":62,\"val\":0},{\"id\":63,\"val\":0.35},{\"id\":64,\"val\":27.27},{\"id\":65,\"val\":0},{\"id\":66,\"val\":0},{\"id\":67,\"val\":0},{\"id\":68,\"val\":0},{\"id\":69,\"val\":0},{\"id\":70,\"val\":0},{\"id\":71,\"val\":0},{\"id\":72,\"val\":0}],"+
                 "\"point\":[{\"id\":36,\"val\":9960},{\"id\":37,\"val\":0},{\"id\":38,\"val\":0},{\"id\":39,\"val\":0},{\"id\":40,\"val\":0},{\"id\":41,\"val\":0},{\"id\":42,\"val\":4746},{\"id\":43,\"val\":0},{\"id\":44,\"val\":816},{\"id\":45,\"val\":24},{\"id\":46,\"val\":4362},{\"id\":47,\"val\":0},{\"id\":48,\"val\":1092},{\"id\":49,\"val\":60},{\"id\":50,\"val\":4956},{\"id\":51,\"val\":0},{\"id\":52,\"val\":1014},{\"id\":53,\"val\":108},{\"id\":54,\"val\":0},{\"id\":55,\"val\":0},{\"id\":56,\"val\":0},{\"id\":57,\"val\":18.75},{\"id\":58,\"val\":21.42},{\"id\":59,\"val\":25},{\"id\":60,\"val\":0},{\"id\":61,\"val\":707788.8},{\"id\":62,\"val\":0},{\"id\":63,\"val\":0.35},{\"id\":64,\"val\":27.27},{\"id\":65,\"val\":0},{\"id\":66,\"val\":0},{\"id\":67,\"val\":0},{\"id\":68,\"val\":0},{\"id\":69,\"val\":0},{\"id\":70,\"val\":0},{\"id\":71,\"val\":0},{\"id\":72,\"val\":0}]" +
                 "}]";
+        String jsonV = "[{\"tp\":16,\"DeviceID\":\"123\"},{\"Deviccetype\":\"PMCMeter\",\"point\":[{\"id\":64,\"val\":27.27},{\"id\":65,\"val\":0}],\"www\":\"222\"}]";
         JSONArray objects1 = JSONArray.parseArray(jsonV);
-        JSONObject jsonObject = objects1.getJSONObject(0);
-        //System.out.println(jsonObject);
+        System.out.println(objects1);
+        JSONObject jsonObject = objects1.getJSONObject(1);
+        jsonObject.put("String","Value");
+        System.out.println(jsonObject);
+        JSONArray jsonArray2 = JSONArray.parseArray(jsonObject.getString("point"));
+        System.out.println(jsonArray2);
+        JSONObject jsonObject2 = jsonArray2.getJSONObject(0);
+        System.out.println(jsonObject2);
+        System.out.println(jsonObject2.getString("val"));
         if (jsonObject.getString("point") != null) {
-            System.out.println(jsonObject.getString("tp"));
+            ////System.out.println(jsonObject.getString("tp"));
             JSONArray point = JSONArray.parseArray(jsonObject.getString("point"));
             String id1 = point.getJSONObject(1).getString("id");
-            System.out.println(id1);
-        }*/
-
-        String json = "{\"msg\": { \"data\": [{\"tgUa\": 191, \"tgUb\": 11,\"tgUc\": 12,\"tgUab\": 0,\"tgUbc\": 0,\"tgUac\": 0,\"tgIa\": 0,\"tglb\": 0,\"tgIc\": 0,\"tgPa\": 0,\"tgPb\": 0,\"tgPc\": 0,\"tgP\": 0,\"tgQa\": 0,\"tgQb\": 0,\"tgQc\": 0,\"tgQ\": 0,\"tgSa\": 0,\"tgSb\": 0,\"tgSc\": 0,\"tgSs\": 0,\"tgPFa\": 1,\"tgPFb\": 1,\"tgPFc\": 1,\"tgPF\": 1,\"tgHz\": 0,\"tgRSSI\": 22,\"tgSupWh\": 1.61,\"tgRtlWh\": 0,\"tgVarh1\": 0.01,\"tgVarh2\": 0,\"tgCwd\": 0,\"tgSIMCard\": \"898604510919C0452912\",\"tgPT\": 1,\"tgCT\": 1}],\"eventTime\": 1607950019180,\"iotdevicename\": \"Test Device\"},\"metadata\": {\"deviceType\": \"default\",\"deviceName\": \"Test Device\",\"ts\": \"1611915126745\"},\"msgType\": \"POST_TELEMETRY_REQUEST\"}";
+            ////System.out.println(id1);
+        }
+        String json = "{\"msg\": { \"data\": [{\"tgSc\": 0,\"tgSs\": 0,\"tgPFa\": 1,\"tgPFb\": 1,\"tgPFc\": 1,\"tgPF\": 1,\"tgHz\": 0,\"tgRSSI\": 22,\"tgSupWh\": 1.61,\"tgRtlWh\": 0,\"tgVarh1\": 0.01,\"tgVarh2\": 0,\"tgCwd\": 0,\"tgSIMCard\": \"898604510919C0452912\",\"tgPT\": 1,\"tgCT\": 1}],\"eventTime\": 1607950019180,\"iotdevicename\": \"Test Device\"},\"msgType\": \"POST_TELEMETRY_REQUEST\"}";
+        //String json = "{\"msg\": { \"data\": [{\"tgUa\": 191, \"tgUb\": 11,\"tgUc\": 12,\"tgUab\": 0,\"tgUbc\": 0,\"tgUac\": 0,\"tgIa\": 0,\"tglb\": 0,\"tgIc\": 0,\"tgPa\": 0,\"tgPb\": 0,\"tgPc\": 0,\"tgP\": 0,\"tgQa\": 0,\"tgQb\": 0,\"tgQc\": 0,\"tgQ\": 0,\"tgSa\": 0,\"tgSb\": 0,\"tgSc\": 0,\"tgSs\": 0,\"tgPFa\": 1,\"tgPFb\": 1,\"tgPFc\": 1,\"tgPF\": 1,\"tgHz\": 0,\"tgRSSI\": 22,\"tgSupWh\": 1.61,\"tgRtlWh\": 0,\"tgVarh1\": 0.01,\"tgVarh2\": 0,\"tgCwd\": 0,\"tgSIMCard\": \"898604510919C0452912\",\"tgPT\": 1,\"tgCT\": 1}],\"eventTime\": 1607950019180,\"iotdevicename\": \"Test Device\"},\"metadata\": {\"deviceType\": \"default\",\"deviceName\": \"Test Device\",\"ts\": \"1611915126745\"},\"msgType\": \"POST_TELEMETRY_REQUEST\"}";
         //String json1 = "{\"tgUa\": 191, \"tgUb\": 11,\"tgUc\": 12,\"tgUab\": 0,\"tgUbc\": 0,\"tgUac\": 0,\"tgIa\": 0,\"tglb\": 0,\"tgIc\": 0,\"tgPa\": 0,\"tgPb\": 0,\"tgPc\": 0,\"tgP\": 0,\"tgQa\": 0,\"tgQb\": 0,\"tgQc\": 0,\"tgQ\": 0,\"tgSa\": 0,\"tgSb\": 0,\"tgSc\": 0,\"tgSs\": 0,\"tgPFa\": 1,\"tgPFb\": 1,\"tgPFc\": 1,\"tgPF\": 1,\"tgHz\": 0,\"tgRSSI\": 22,\"tgSupWh\": 1.61,\"tgRtlWh\": 0,\"tgVarh1\": 0.01,\"tgVarh2\": 0,\"tgCwd\": 0,\"tgSIMCard\": \"898604510919C0452912\",\"tgPT\": 1,\"tgCT\": 1}";
         JSONObject objects = JSON.parseObject(json, Feature.OrderedField);
+        //System.out.println(objects);
         JSONObject jsonObject1 = JSON.parseObject(objects.getString("msg"), Feature.OrderedField);
-        /*JSONArray jsonArray = JSONArray.parseArray(jsonObject1.getString("data"));
-        System.out.println(jsonArray);*/
+        //System.out.println(jsonObject1);
+        JSONArray jsonArray = JSONArray.parseArray(jsonObject1.getString("data"));
+       /// System.out.println(jsonArray);
         JSONArray jsonArray1 = jsonObject1.getJSONArray("data");
-        //System.out.println(jsonArray1);
+       /// System.out.println(jsonArray1);
         JSONObject jsonObj = JSON.parseObject(String.valueOf(jsonArray1.getJSONObject(0)), Feature.OrderedField);
         System.out.println(jsonObj);
         //https://blog.csdn.net/a18827547638/article/details/80272099
         //https://blog.csdn.net/a18827547638/article/details/80777366
+        /*String demo = "[{\"lastUpdateTs\":1612203895530,\"key\":\"lastActivityTime\",\"value\":1612203887711},{\"lastUpdateTs\":1612201617541,\"key\":\"lastDisconnectTime\",\"value\":1612201579611},{\"lastUpdateTs\":1612201617541,\"key\":\"lastInactivityAlarmTime\",\"value\":1612166718092},{\"lastUpdateTs\":1612201617541,\"key\":\"active\",\"value\":true},{\"lastUpdateTs\":1612201617541,\"key\":\"lastConnectTime\",\"value\":1612201617512},{\"lastUpdateTs\":1612201617541,\"key\":\"inactivityTimeout\",\"value\":600000},{\"lastUpdateTs\":1612201617541,\"key\":\"iotdevicename\",\"value\":\"zzz\"}]";
+        //String demo1 = "[]";
+        JSONArray jsonArray = JSONArray.parseArray(demo);
+        Map<Object,Object> map = new HashMap<>();
+        for (int i =0;i<jsonArray.size();i++){
+            map.put(jsonArray.getJSONObject(i).getString("key"),jsonArray.getJSONObject(i).getString("value"));
+        }
+        System.out.println(map);*/
     }
 }
